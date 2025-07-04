@@ -25,16 +25,8 @@ namespace TP24234.Models
         [JsonProperty]
         public string peliculaFav { get; private set; }
 
-        public Integrantes(string pNombreGrupo, string pUsuario, string pContraseña, string pNombre, string pFrase, string pHobby, string pProfeFav, string pPeliculaFav)
+        public Integrantes()
         {
-            nombreGrupo = pNombreGrupo;
-            usuario = pUsuario;
-            contraseña = pContraseña;
-            nombre = pNombre;
-            frase = pFrase;
-            hobby = pHobby;
-            profeFav = pProfeFav;
-            peliculaFav = pPeliculaFav;
         }
     }
 }
