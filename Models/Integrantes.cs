@@ -24,6 +24,8 @@ namespace TP24234.Models
         public string profeFav { get; private set; }
         [JsonProperty]
         public string peliculaFav { get; private set; }
+        [JsonProperty]
+        public string foto { get; private set; }
 
         public Integrantes()
         {
