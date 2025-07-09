@@ -10,15 +10,31 @@ namespace TP24234.Models
     public class BD
     {
         private static string _connectionString = "@Server=localhost;DataBase = TP6_Introducciónabasededatos; Integrates Security = True; TrustServerCertificate=True;";
-    }
-    public List<Integrantes> LevantarIntegrante()
-    {
-        List<Integrantes> integrantes = new List<Integrantes>();
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        public bool VerificarContraseña(string user, string contraseña)
         {
-            string query = "SELECT * FROM Integrantes";
-            integrantes = connection.Query<Integrantes>(query).ToList();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT Contraseña FROM Integrantes WHERE Usuario = @user";
+
+                string contraseñaBD = connection.QueryFirstOrDefault<string>(query, new { user });
+
+                if (contraseñaBD == null)
+                {
+                    return false;
+                }
+
+                return contraseñaBD == contraseña;
+            }
         }
-        return integrantes;
+        public List<Integrantes> IntegrantesDelGrupo()
+        {
+            List<Integrantes> integrantes = new List<Integrantes>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Integrantes WHERE ";
+                integrantes = connection.Query<Integrantes>(query).ToList();
+            }
+            return integrantes;
+        }
     }
 }
