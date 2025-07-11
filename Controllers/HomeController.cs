@@ -16,12 +16,10 @@ namespace TP24234.Controllers
         [HttpPost]
         public IActionResult Login(string usuario, string contraseña)
         {
-            BD bd = new BD();
 
-            if (bd.VerificarContraseña(usuario, contraseña))
+            if (BD.VerificarContraseña(usuario, contraseña))
             {
-                HttpContext.Session.SetString("partida", Objeto.ObjectToString(bd));
-                Integrante integrante = bd.ObtenerPorUsuario(usuario);
+                Integrante integrante = BD.ObtenerPorUsuario(usuario);
                 return RedirectToAction("Miembros", integrante.idGrupo);
             }
 
@@ -30,8 +28,7 @@ namespace TP24234.Controllers
         }
         public IActionResult Miembros(int Grupo)
         {
-            BD bd = new BD();
-            List<Integrante> lista = bd.TodosLosDeUnGrupo(Grupo);
+            List<Integrante> lista = BD.TodosLosDeUnGrupo(Grupo);
             ViewBag.Miembros = lista;
             return View("MiembrosGrupo");
         }

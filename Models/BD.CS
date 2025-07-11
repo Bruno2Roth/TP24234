@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace TP24234.Models
 {
-    public class BD
+    public static class BD
     {
         private static string _connectionString = "Server=localhost;Database=TP6_Introducciónabasededatos;Integrated Security=True;TrustServerCertificate=True;";
 
-        public Integrante ObtenerPorUsuario(string user)
+        public static Integrante ObtenerPorUsuario(string user)
         {
-            Integrante i = null;
+            Integrante i = new Integrante();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = "SELECT * FROM Integrantes WHERE Usuario = @pUser";
@@ -21,9 +21,9 @@ namespace TP24234.Models
             return i;
         }
 
-        public bool VerificarContraseña(string user, string contraseña)
+        public static bool VerificarContraseña(string user, string contraseña)
         {
-            var integrante = ObtenerPorUsuario(user);
+            Integrante integrante = ObtenerPorUsuario(user);
             if (integrante == null) return false;
 
             bool logeado = false;
@@ -35,21 +35,22 @@ namespace TP24234.Models
             return logeado;
         }
 
-        public List<Integrante> TodosLosDeUnGrupo(int Grupo)
+        public static List<Integrante> TodosLosDeUnGrupo(int Grupo)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM Integrante WHERE idGrupo = @Grupo";
+                string query = "SELECT * FROM Integrantes WHERE idGrupo = @Grupo";
                 return connection.Query<Integrante>(query, new { Grupo }).ToList();
             }
         }
 
-        public void AgregarIntegrante(int idGrupo, string usuario, string contraseña, string nombre, string frase, string hobby, string profeFav, string peliculaFav)
+        public static void AgregarIntegrante(int idGrupo, string usuario, string contraseña, string nombre, string frase, string hobby, string profeFav, string p)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = @"INSERT INTO Integrante (idGrupo, usuario, contraseña, nombre, frase, hobby, profeFav, peliculaFav)
-                                 VALUES (@idGrupo, @usuario, @contraseña, @nombre, @frase, @hobby, @profeFav, @peliculaFav)";
+                string query = @"INSERT INTO Integrantes(Nombre, Usuario, Contraseña, nombre, Frase, Hobby, ProfeFav, PeliculaFav, idGrupo) 
+                               VALUES (@idGrupo, @usuario, @contraseña, @nombre, @frase, @hobby, @profeFav, @peliculaFav)";
+
                 connection.Execute(query);
             }
         }
