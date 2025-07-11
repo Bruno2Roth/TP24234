@@ -1,5 +1,5 @@
-﻿@{
-    ViewData["Title"] = "Login";
+@{
+    ViewData["Title"] = "Gr";
 }
 
 <div>
@@ -10,7 +10,7 @@
     <form action='@Url.Action("Login", "Home")' method="POST" enctype="multipart/form-data" required>
 
         Usuario: <input type="text" name="user" required><br/>
-        Contraseña: <input type="text" name="password" required>
+        Contraseña: <input type="password" name="password" required>
 
         <input type="submit" value="Iniciar Sesión" />
 

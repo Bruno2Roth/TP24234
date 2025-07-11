@@ -27,7 +27,7 @@ namespace TP24234.Models
             if (integrante == null) return false;
 
             bool logeado = false;
-            if (integrante.contraseña == contraseña)
+            if (integrante.Contraseña == contraseña)
             {
                 logeado = true;
             }
@@ -44,13 +44,13 @@ namespace TP24234.Models
             }
         }
 
-        public void AgregarIntegrante(Integrante nuevo)
+        public void AgregarIntegrante(int idGrupo, string usuario, string contraseña, string nombre, string frase, string hobby, string profeFav, string peliculaFav)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = @"INSERT INTO Integrante (idGrupo, usuario, contraseña, nombre, frase, hobby, profeFav, peliculaFav)
                                  VALUES (@idGrupo, @usuario, @contraseña, @nombre, @frase, @hobby, @profeFav, @peliculaFav)";
-                connection.Execute(query, nuevo);
+                connection.Execute(query);
             }
         }
     }

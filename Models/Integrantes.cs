@@ -9,24 +9,25 @@ namespace TP24234.Models
     public class Integrante
     {
         [JsonProperty]
+        public string Nombre { get; set; }
+        [JsonProperty]
+        public string Usuario { get; set; }
+        [JsonProperty]
+        public string Contraseña { get; set; }
+        [JsonProperty]
+        public string Frase { get; set; }
+        [JsonProperty]
+        public string Hobby { get; set; }
+        [JsonProperty]
+        public string ProfeFav { get; set; }
+        [JsonProperty]
+        public string PeliculaFav { get; set; }
+        [JsonProperty]
         public int idGrupo { get; set; }
-        [JsonProperty]
-        public string usuario { get; set; }
-        [JsonProperty]
-        public string contraseña { get; set; }
-        [JsonProperty]
-        public string nombre { get; set; }
-        [JsonProperty]
-        public string frase { get; set; }
-        [JsonProperty]
-        public string hobby { get; set; }
-        [JsonProperty]
-        public string profeFav { get; set; }
-        [JsonProperty]
-        public string peliculaFav { get; set; }
-
         public Integrante()
         {
         }
+
+        
     }
 }
