@@ -2,39 +2,56 @@ using Microsoft.Data.SqlClient;
 using Dapper;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using TP24234.Models;
 
 namespace TP24234.Models
 {
     public class BD
     {
-        private static string _connectionString = "@Server=localhost;DataBase = TP6_Introducciónabasededatos; Integrates Security = True; TrustServerCertificate=True;";
+        private static string _connectionString = "Server=localhost;Database=TP6_Introducciónabasededatos;Integrated Security=True;TrustServerCertificate=True;";
+
+        public Integrante ObtenerPorUsuario(string user)
+        {
+            Integrante i = null;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Integrantes WHERE Usuario = @pUser";
+                i = connection.QueryFirstOrDefault<Integrante>(query, new { pUser = user });
+            }
+
+            return i;
+        }
+
         public bool VerificarContraseña(string user, string contraseña)
         {
+            var integrante = ObtenerPorUsuario(user);
+            if (integrante == null) return false;
+
+            bool logeado = false;
+            if (integrante.contraseña == contraseña)
+            {
+                logeado = true;
+            }
+
+            return logeado;
+        }
+
+        public List<Integrante> TodosLosDeUnGrupo(int Grupo)
+        {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT Contraseña FROM Integrantes WHERE Usuario = @user";
-
-                string contraseñaBD = connection.QueryFirstOrDefault<string>(query, new { user });
-
-                if (contraseñaBD == null)
-                {
-                    return false;
-                }
-
-                return contraseñaBD == contraseña;
+                string query = "SELECT * FROM Integrante WHERE idGrupo = @Grupo";
+                return connection.Query<Integrante>(query, new { Grupo }).ToList();
             }
         }
-        public List<Integrantes> IntegrantesDelGrupo()
+
+        public void AgregarIntegrante(Integrante nuevo)
         {
-            List<Integrantes> integrantes = new List<Integrantes>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM Integrantes WHERE ";
-                integrantes = connection.Query<Integrantes>(query).ToList();
+                string query = @"INSERT INTO Integrante (idGrupo, usuario, contraseña, nombre, frase, hobby, profeFav, peliculaFav)
+                                 VALUES (@idGrupo, @usuario, @contraseña, @nombre, @frase, @hobby, @profeFav, @peliculaFav)";
+                connection.Execute(query, nuevo);
             }
-            return integrantes;
         }
     }
 }

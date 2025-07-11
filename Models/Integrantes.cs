@@ -6,28 +6,26 @@ using Newtonsoft.Json;
 
 namespace TP24234.Models
 {
-    public class Integrantes
+    public class Integrante
     {
         [JsonProperty]
-        public string nombreGrupo { get; private set; }
+        public int idGrupo { get; set; }
         [JsonProperty]
-        public string usuario { get; private set; }
+        public string usuario { get; set; }
         [JsonProperty]
-        public string contraseña { get; private set; }
+        public string contraseña { get; set; }
         [JsonProperty]
-        public string nombre { get; private set; }
+        public string nombre { get; set; }
         [JsonProperty]
-        public string frase { get; private set; }
+        public string frase { get; set; }
         [JsonProperty]
-        public string hobby { get; private set; }
+        public string hobby { get; set; }
         [JsonProperty]
-        public string profeFav { get; private set; }
+        public string profeFav { get; set; }
         [JsonProperty]
-        public string peliculaFav { get; private set; }
-        [JsonProperty]
-        public string foto { get; private set; }
+        public string peliculaFav { get; set; }
 
-        public Integrantes()
+        public Integrante()
         {
         }
     }
