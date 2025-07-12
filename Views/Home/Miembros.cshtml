@@ -1,19 +1,31 @@
 @{
-    ViewData["Title"] = "Gr";
+    ViewData["Title"] = ViewBag.Miembros.NombreGrupo;
+    string c = null;
+
+    if (ViewBag.Miembros.NombreGrupo == "FRANcia")
+    {
+        c = "francia";
+    }else if (ViewBag.Miembros.NombreGrupo == "Las Sinfonías")
+    {
+        c = "sinfonias";
+    }else if(ViewBag.Miembros.NombreGrupo == "BrunoBerman")
+    {
+        c = "brunoberman";
+    }
 }
 
-<div>
 
-    @if(ViewBag.Error){
-        <h1>Verifique su usuario y contraseña</h1>
-    }
-    <form action='@Url.Action("Login", "Home")' method="POST" enctype="multipart/form-data" required>
+<section class="@(c)">
 
-        Usuario: <input type="text" name="user" required><br/>
-        Contraseña: <input type="password" name="password" required>
-
-        <input type="submit" value="Iniciar Sesión" />
-
-    </form>
-
-</div>
+  @foreach (Integrante i in ViewBag.Miembros.miembros)
+  {
+      <div class="member-card">
+          <h3>@i.Nombre</h3>
+          <h4>@i.Usuario</h4>
+          <h4>"@i.Frase"</h4>
+          <h4>Hobby: @i.Hobby</h4>
+          <h4>Profesor Favorito: @i.ProfeFav</h4>
+          <h4>Película Favorita: @i.PeliculaFav</h4>
+      </div>
+  }
+</section>

@@ -40,7 +40,16 @@ namespace TP24234.Models
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = "SELECT * FROM Integrantes WHERE idGrupo = @Grupo";
-                return connection.Query<Integrante>(query, new { Grupo }).ToList();
+return connection.Query<Integrante>(query, new { Grupo = Grupo }).ToList();
+            }
+        }
+
+        public static Grupo ObtenerGrupo(int Grupo )
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Grupos WHERE idGrupo = @idGrupo";
+                return connection.QueryFirstOrDefault<Grupo>(query, new { idGrupo = Grupo });
             }
         }
 

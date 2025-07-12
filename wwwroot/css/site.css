@@ -21,3 +21,81 @@ footer {
   background-color: #f8f9fa;
   border-top: 1px solid #e9ecef;
 }
+/* estilos generales */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* tarjeta de integrante */
+.member-card {
+  flex: 1 1 260px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 1.5rem;
+  transition: transform .2s, box-shadow .2s;
+}
+.member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+.member-card h3 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+}
+.member-card h4 {
+  margin: .25rem 0;
+  font-weight: normal;
+  font-size: .95rem;
+}
+
+/* ─── FRANcia: vibra relajada, tonos azules ─── */
+.francia {
+  background: #e0f7fa;
+  color: #004d40;
+}
+.francia .member-card {
+  background: #ffffff;
+}
+.francia .member-card h3 {
+  color: #00796b;
+}
+.francia .member-card h4 {
+  color: #004d40;
+}
+
+/* ─── BrunoBerman: ambiente casino ─── */
+.brunoberman {
+  background: #1b2b1e;
+  color: #f9d71c;
+}
+.brunoberman .member-card {
+  background: rgba(249,215,28,0.1);
+}
+.brunoberman .member-card h3 {
+  color: #f9d71c;
+}
+.brunoberman .member-card h4 {
+  color: #e6c21b;
+}
+
+/* ─── Las Sinfonías: vibras eléctricas, rojos ─── */
+.sinfonias {
+  background: #1a0000;
+  color: #ff1a1a;
+}
+.sinfonias .member-card {
+  background: rgba(255,26,26,0.1);
+}
+.sinfonias .member-card h3 {
+  color: #ff1a1a;
+}
+.sinfonias .member-card h4 {
+  color: #e60000;
+}

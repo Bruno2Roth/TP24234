@@ -10,7 +10,7 @@ namespace TP24234.Models
     public class Grupo
     {
         [JsonProperty]
-        public string nombre { get; set; }
+        public string NombreGrupo { get; set; }
         [JsonProperty]
         public List<Integrante> miembros { get; set; }
 

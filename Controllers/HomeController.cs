@@ -7,7 +7,7 @@ namespace TP24234.Controllers
     {
 
 
-        public IActionResult Index(int Grupo)
+        public IActionResult Index()
         {
             ViewBag.Error = false;
             return View("Index");
@@ -20,7 +20,7 @@ namespace TP24234.Controllers
             if (BD.VerificarContraseña(usuario, contraseña))
             {
                 Integrante integrante = BD.ObtenerPorUsuario(usuario);
-                return RedirectToAction("Miembros", integrante.idGrupo);
+                return RedirectToAction("Miembros",  new { Grupo = integrante.idGrupo });
             }
 
             ViewBag.Error = true;
@@ -28,9 +28,11 @@ namespace TP24234.Controllers
         }
         public IActionResult Miembros(int Grupo)
         {
-            List<Integrante> lista = BD.TodosLosDeUnGrupo(Grupo);
-            ViewBag.Miembros = lista;
-            return View("MiembrosGrupo");
+            Grupo g = BD.ObtenerGrupo(Grupo);
+            g.miembros = BD.TodosLosDeUnGrupo(Grupo);
+            ViewBag.Miembros = g;
+
+            return View("Miembros");
         }
 
 
