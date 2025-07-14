@@ -23,6 +23,8 @@ namespace TP24234.Models
         [JsonProperty]
         public string PeliculaFav { get; set; }
         [JsonProperty]
+        public string Foto { get; set; }
+        [JsonProperty]
         public int idGrupo { get; set; }
         public Integrante()
         {
