@@ -31,7 +31,7 @@ namespace TP24234.Controllers
             Grupo g = BD.ObtenerGrupo(Grupo);
             g.miembros = BD.TodosLosDeUnGrupo(Grupo);
             ViewBag.Miembros = g;
-
+            
             return View("Miembros");
         }
 
