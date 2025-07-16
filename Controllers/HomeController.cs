@@ -43,12 +43,15 @@ namespace TP24234.Controllers
         public IActionResult ponerMiembroEnBD(string nombre, string usuario, string contraseña, string frase, string hobby, string profeFav, string peliculaFav, string foto, int IDgrupo)
         {
             BD.AgregarIntegrante(nombre, usuario, contraseña, frase, hobby, profeFav, peliculaFav, foto, IDgrupo);
-            Integrante i = BD.ObtenerPorUsuario(usuario);
             Grupo g = BD.ObtenerGrupo(IDgrupo);
+            g.miembros = BD.TodosLosDeUnGrupo(IDgrupo);
+            Integrante i = BD.ObtenerPorUsuario(usuario);
+
+
             g.miembros.Add(i);
 
 
-            return View("Login");
+            return View("Index");
         }
 
     }
