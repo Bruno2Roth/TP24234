@@ -10,26 +10,46 @@ namespace TP24234.Controllers
         public IActionResult Index()
         {
             ViewBag.Error = false;
+
+            if (Objeto.StringToObject<bool>(HttpContext.Session.GetString("logeado")))
+            {
+
+                return RedirectToAction("Miembros", new { Grupo = HttpContext.Session.GetString("logeado") });
+
+            }
+
             return View("Index");
         }
 
         [HttpPost]
         public IActionResult Login(string usuario, string contraseña)
         {
+            bool logeado = false;
 
             if (BD.VerificarContraseña(usuario, contraseña))
             {
                 Integrante integrante = BD.ObtenerPorUsuario(usuario);
+
+                int grupoSesión = integrante.idGrupo;
+                logeado = true;
+
+                HttpContext.Session.SetString("gSesion", Objeto.ObjectToString(grupoSesión));
+                HttpContext.Session.SetString("logeado", Objeto.ObjectToString(logeado));
+
+
                 return RedirectToAction("Miembros", new { Grupo = integrante.idGrupo });
             }
+
 
             ViewBag.Error = true;
             return View("Index");
         }
-        public IActionResult Miembros(int Grupo)
+        public IActionResult Miembros()
         {
-            Grupo g = BD.ObtenerGrupo(Grupo);
-            g.miembros = BD.TodosLosDeUnGrupo(Grupo);
+            int nGrupo = Objeto.StringToObject<int>(HttpContext.Session.GetString("grupoSesión"));
+
+            Grupo g = BD.ObtenerGrupo(nGrupo);
+            g.miembros = BD.TodosLosDeUnGrupo(nGrupo);
             ViewBag.Miembros = g;
 
             return View("Miembros");
@@ -37,6 +57,8 @@ namespace TP24234.Controllers
 
         public IActionResult AgregarMiembros(int Grupo)
         {
+
+
             return View();
         }
 
