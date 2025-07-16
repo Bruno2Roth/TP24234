@@ -53,14 +53,14 @@ return connection.Query<Integrante>(query, new { Grupo = Grupo }).ToList();
             }
         }
 
-        public static void AgregarIntegrante(int idGrupo, string usuario, string contraseña, string nombre, string frase, string hobby, string profeFav, string peliculaFav, string foto)
+        public static void AgregarIntegrante(string nombre, string usuario, string contraseña, string frase, string hobby, string profeFav, string peliculaFav, string foto, int IDgrupo)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = @"INSERT INTO Integrantes(Nombre, Usuario, Contraseña, nombre, Frase, Hobby, ProfeFav, PeliculaFav, idGrupo, Foto) 
-                               VALUES (@idGrupo, @usuario, @contraseña, @nombre, @frase, @hobby, @profeFav, @peliculaFav, @Foto)";
+                string query = @"INSERT INTO Integrantes(Nombre, Usuario, Contraseña, Frase, Hobby, ProfeFav, PeliculaFav, idGrupo, Foto) 
+                               VALUES (@nombre, @usuario, @contraseña, @frase, @hobby, @profeFav, @peliculaFav, @IDgrupo, @foto)";
 
-                connection.Execute(query);
+                connection.Execute(query, new{ nombre, usuario, contraseña, frase, hobby, profeFav, peliculaFav, IDgrupo, foto });
             }
         }
     }

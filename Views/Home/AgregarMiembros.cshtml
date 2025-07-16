@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="login-container">
+    <div class="login-box">
+        <h1>Iniciar Sesión</h1>
+
+        @if (ViewBag.Error == true)
+        {
+            <p class="error-msg">Verifique su usuario y contraseña</p>
+        }
+
+        <form action='@Url.Action("ponerMiembroEnBD", "Home")' method="POST" enctype="multipart/form-data">
+            <input type="text" name="nombre" placeholder="Nombre" required />
+            <input type="text" name="usuario" placeholder="Usuario" required />
+            <input type="password" name="contraseña" placeholder="Contraseña" required />
+            <input type="text" name="frase" placeholder="Frase" required />
+            <input type="text" name="hobby" placeholder="Hobby" required />
+            <input type="text" name="profeFav" placeholder="Profesor Favorito" required />
+            <input type="text" name="peliculaFav" placeholder="Película Favorita" required />
+            <input type="text" name="foto" placeholder="Foto (link a la imagen)" required />
+            <input type="number" name="IDgrupo" min="1" max="10" required />
+
+
+            <input type="submit" value="Crear Miembro" class="btn-login" />
+        </form>
+    </div>
+</section>
