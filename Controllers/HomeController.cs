@@ -33,7 +33,7 @@ namespace TP24234.Controllers
                 int grupoSesión = integrante.idGrupo;
                 logeado = true;
 
-                HttpContext.Session.SetString("gSesion", Objeto.ObjectToString(grupoSesión));
+                HttpContext.Session.SetString("grupoSesión", Objeto.ObjectToString(grupoSesión));
                 HttpContext.Session.SetString("logeado", Objeto.ObjectToString(logeado));
 
 
@@ -46,6 +46,10 @@ namespace TP24234.Controllers
         }
         public IActionResult Miembros()
         {
+            if (!Objeto.StringToObject<bool>(HttpContext.Session.GetString("logeado")))
+            { 
+                return RedirectToAction("Index");
+            }
             int nGrupo = Objeto.StringToObject<int>(HttpContext.Session.GetString("grupoSesión"));
 
             Grupo g = BD.ObtenerGrupo(nGrupo);
@@ -57,6 +61,10 @@ namespace TP24234.Controllers
 
         public IActionResult AgregarMiembros(int Grupo)
         {
+            if (!Objeto.StringToObject<bool>(HttpContext.Session.GetString("logeado")))
+            { 
+                return RedirectToAction("Index");
+            }
 
 
             return View();
@@ -75,7 +83,12 @@ namespace TP24234.Controllers
 
             return View("Index");
         }
+        public IActionResult CerrarSesión()
+        {
+            HttpContext.Session.SetString("logeado", Objeto.ObjectToString(false));
 
+            return View("Index");
+        }
     }
 }
 

@@ -251,3 +251,19 @@ footer a:hover {
   margin-bottom: 1rem;
   font-weight: 500;
 }
+.login-box select {
+  width: 100%;
+  padding: 0.75rem;
+    margin-bottom: 1.2rem;
+  border: 1px solid #444;
+  background-color: #2c2c2c;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  appearance: none; /* oculta el estilo por defecto del navegador */
+}
+
+.login-box select:invalid {
+  color: #bbb;
+}
